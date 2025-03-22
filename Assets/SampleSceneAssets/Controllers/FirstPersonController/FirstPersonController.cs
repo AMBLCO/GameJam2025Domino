@@ -72,12 +72,25 @@ namespace StarterAssets
 		private CharacterController _controller;
 		private StarterAssetsInputs _input;
 		private GameObject _mainCamera;
+		public bool pushPower = false;
+		private bool creationFrozen = false;
+
+		[SerializeField] private GameObject _shop;
 
 		private int _audioSourceCount = 8;
 		private AudioSource[] _audioSources;
 		private bool[] _isPlaying;
 
 		private const float _threshold = 0.01f;
+
+		public void BuyPush()
+        {
+			if (Score >= 100)
+			{
+				Score -= 100;
+				pushPower = true;
+			}
+        }
 
 		private bool IsCurrentDeviceMouse
 		{
@@ -120,7 +133,10 @@ namespace StarterAssets
 		{
 			Creation();
 			Delete();
-			Push();
+
+			if (pushPower)
+				Push();
+
 			JumpAndGravity();
 			GroundedCheck();
 			Move();
@@ -200,14 +216,30 @@ namespace StarterAssets
         {
 			if(_input.create && !_input.delete)
             {
+<<<<<<< Updated upstream
 				_dominoCreater.CreateDomino();
 				PlayRandomClip();
+=======
+				if (!creationFrozen)
+				{
+					_dominoCreater.CreateDomino();
+					CreateDelay();
+				}
+>>>>>>> Stashed changes
 			}
 		}
 
+		private async Task CreateDelay()
+        {
+			creationFrozen = true;
+			await Task.Delay(5);
+			creationFrozen = false;
+        }
+
 		private void LateUpdate()
 		{
-			CameraRotation();
+			if(!_shop.activeSelf)
+				CameraRotation();
 		}
 
 		private void GroundedCheck()

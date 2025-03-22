@@ -2,13 +2,11 @@ using UnityEngine;
 
 public class Pointage : MonoBehaviour
 {
-    public int score = 0;
-
     private bool pointAvailable = true;
 
     StarterAssets.FirstPersonController player;
 
-	private void Start()
+    private void Start()
 	{
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<StarterAssets.FirstPersonController>();
     }
