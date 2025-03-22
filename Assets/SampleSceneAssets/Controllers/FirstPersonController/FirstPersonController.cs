@@ -102,6 +102,7 @@ namespace StarterAssets
 		private void Update()
 		{
 			Push();
+			Delete();
 			Creation();
 			JumpAndGravity();
 			GroundedCheck();
@@ -124,14 +125,30 @@ namespace StarterAssets
 			}
         }
 
+		private void Delete()
+		{
+			if (_input.delete)
+			{
+				RaycastHit rayHit = new RaycastHit();
+				if (Physics.Raycast(_mainCamera.transform.position, _mainCamera.transform.forward, out rayHit, 10))
+				{
+					if (rayHit.collider.gameObject.name.Contains("Domino"))
+					{
+						GameObject.Destroy(rayHit.rigidbody.gameObject);
+					}
+				}
+				_input.delete = false;
+			}
+		}
+
 		private void Creation()
         {
 			if(_input.create)
             {
 				_dominoCreater.CreateDomino();
-            }
-			_input.create = false;
-        }
+				_input.create = false;
+			}
+		}
 
 		private void LateUpdate()
 		{

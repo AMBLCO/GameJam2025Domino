@@ -12,6 +12,7 @@ namespace StarterAssets
 		public bool sprint;
 		public bool create;
 		public bool push;
+		public bool delete;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -53,6 +54,11 @@ namespace StarterAssets
 			PushInput(value.isPressed);
         }
 
+		public void OnDelete(InputValue value)
+		{
+			DeleteInput(value.isPressed);
+		}
+
 		public void MoveInput(Vector2 newMoveDirection)
 		{
 			move = newMoveDirection;
@@ -82,6 +88,11 @@ namespace StarterAssets
         {
 			push = newPushState;
         }
+
+		public void DeleteInput(bool newDeleteState)
+		{
+			push = newDeleteState;
+		}
 
 		private void OnApplicationFocus(bool hasFocus)
 		{
