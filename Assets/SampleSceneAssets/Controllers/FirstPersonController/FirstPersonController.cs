@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Threading.Tasks;
+using System;
 
 namespace StarterAssets
 {
@@ -118,7 +120,8 @@ namespace StarterAssets
                 {
                     if (rayHit.collider.gameObject.name.Contains("Domino"))
                     {
-                        rayHit.rigidbody.AddForce(_mainCamera.transform.forward, ForceMode.Impulse);
+						PlayClip("Sounds/Clap");
+						rayHit.rigidbody.AddForce(_mainCamera.transform.forward, ForceMode.Impulse);
                     }
                 }
 				_input.push = false;
@@ -140,6 +143,17 @@ namespace StarterAssets
 				_input.delete = false;
 			}
 		}
+		
+		private async void PlayClip(string filePath)
+        {
+			AudioClip clap = Resources.Load<AudioClip>(filePath);
+			AudioSource audioSource = this.gameObject.AddComponent<AudioSource>();
+			audioSource.clip = clap;
+			audioSource.Play();
+
+			await Task.Delay(TimeSpan.FromSeconds(clap.length));
+            Destroy(audioSource);
+        }
 
 		private void Creation()
         {
