@@ -60,6 +60,8 @@ namespace StarterAssets
 		private float _jumpTimeoutDelta;
 		private float _fallTimeoutDelta;
 
+		//Domino Creater
+		private DominoCreater _dominoCreater;
 	
 		private PlayerInput _playerInput;
 		private CharacterController _controller;
@@ -90,6 +92,7 @@ namespace StarterAssets
 			_controller = GetComponent<CharacterController>();
 			_input = GetComponent<StarterAssetsInputs>();
 			_playerInput = GetComponent<PlayerInput>();
+			_dominoCreater = GameObject.FindGameObjectWithTag("DominoCreater").GetComponent<DominoCreater>();
 
 			// reset our timeouts on start
 			_jumpTimeoutDelta = JumpTimeout;
@@ -98,10 +101,20 @@ namespace StarterAssets
 
 		private void Update()
 		{
+			Creation();
 			JumpAndGravity();
 			GroundedCheck();
 			Move();
 		}
+
+		private void Creation()
+        {
+			if(_input.create)
+            {
+				_dominoCreater.CreateDomino();
+            }
+			_input.create = false;
+        }
 
 		private void LateUpdate()
 		{

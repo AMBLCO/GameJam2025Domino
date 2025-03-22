@@ -10,6 +10,7 @@ namespace StarterAssets
 		public Vector2 look;
 		public bool jump;
 		public bool sprint;
+		public bool create;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -41,6 +42,10 @@ namespace StarterAssets
 			SprintInput(value.isPressed);
 		}
 
+		public void OnCreate(InputValue value)
+        {
+			CreateInput(value.isPressed);
+        }
 
 		public void MoveInput(Vector2 newMoveDirection)
 		{
@@ -61,6 +66,11 @@ namespace StarterAssets
 		{
 			sprint = newSprintState;
 		}
+
+		public void CreateInput(bool newCreateState)
+        {
+			create = newCreateState;
+        }
 
 		private void OnApplicationFocus(bool hasFocus)
 		{
