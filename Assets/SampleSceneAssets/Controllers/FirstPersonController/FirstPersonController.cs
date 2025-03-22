@@ -49,6 +49,9 @@ namespace StarterAssets
 		[Tooltip("How far in degrees can you move the camera down")]
 		public float BottomClamp = -90.0f;
 
+		[Tooltip("Current Score/Money")]
+		public int Score = 0;
+
 		// cinemachine
 		private float _cinemachineTargetPitch;
 
@@ -103,12 +106,20 @@ namespace StarterAssets
 
 		private void Update()
 		{
-			Push();
-			Delete();
 			Creation();
+			Delete();
+			Push();
 			JumpAndGravity();
 			GroundedCheck();
 			Move();
+			ClearInputs();
+		}
+
+		private void ClearInputs()
+        {
+			_input.delete = false;
+			_input.create = false;
+			_input.push = false;
 		}
 
 		private void Push()
@@ -124,7 +135,6 @@ namespace StarterAssets
 						rayHit.rigidbody.AddForce(_mainCamera.transform.forward, ForceMode.Impulse);
                     }
                 }
-				_input.push = false;
 			}
         }
 
@@ -137,10 +147,9 @@ namespace StarterAssets
 				{
 					if (rayHit.collider.gameObject.name.Contains("Domino"))
 					{
-						GameObject.Destroy(rayHit.rigidbody.gameObject);
+						Destroy(rayHit.rigidbody.gameObject);
 					}
 				}
-				_input.delete = false;
 			}
 		}
 		
@@ -157,10 +166,9 @@ namespace StarterAssets
 
 		private void Creation()
         {
-			if(_input.create)
+			if(_input.create && !_input.delete)
             {
 				_dominoCreater.CreateDomino();
-				_input.create = false;
 			}
 		}
 

@@ -91,7 +91,7 @@ namespace StarterAssets
 
 		public void DeleteInput(bool newDeleteState)
 		{
-			push = newDeleteState;
+			delete = newDeleteState;
 		}
 
 		private void OnApplicationFocus(bool hasFocus)

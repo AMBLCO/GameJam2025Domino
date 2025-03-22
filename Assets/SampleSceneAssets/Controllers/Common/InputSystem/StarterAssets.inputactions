@@ -62,7 +62,7 @@
                 {
                     "name": "Delete",
                     "type": "Button",
-                    "id": "3eb481bc-dda9-4bd6-bfd2-7389b7d5b430",
+                    "id": "c9a7fb45-aeab-4bbb-bbaf-001fe00b7d4e",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -270,8 +270,8 @@
                 },
                 {
                     "name": "One Modifier",
-                    "id": "09e564f1-c557-47a3-bb30-96b8108531e6",
-                    "path": "OneModifier(overrideModifiersNeedToBePressedFirst=true)",
+                    "id": "bee013e7-098b-462c-b570-7ae5eb459426",
+                    "path": "OneModifier",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -281,8 +281,8 @@
                 },
                 {
                     "name": "modifier",
-                    "id": "131119e5-ea6d-4986-8594-f603fbd95c86",
-                    "path": "<Keyboard>/shift",
+                    "id": "6a5f4521-bf7d-4516-8ea2-0599e4bb6506",
+                    "path": "<Keyboard>/leftShift",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -292,7 +292,7 @@
                 },
                 {
                     "name": "binding",
-                    "id": "3b8e01b1-5c45-4eca-8868-f5bdc030cbf1",
+                    "id": "2c0303d4-4cd0-42ac-82c2-c382251ddce0",
                     "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
