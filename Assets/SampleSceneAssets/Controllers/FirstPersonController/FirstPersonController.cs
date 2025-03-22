@@ -101,11 +101,28 @@ namespace StarterAssets
 
 		private void Update()
 		{
+			Push();
 			Creation();
 			JumpAndGravity();
 			GroundedCheck();
 			Move();
 		}
+
+		private void Push()
+        {
+			if (_input.push)
+            {
+				RaycastHit rayHit = new RaycastHit();
+				if (Physics.Raycast(_mainCamera.transform.position, _mainCamera.transform.forward, out rayHit, 10))
+                {
+                    if (rayHit.collider.gameObject.name.Contains("Domino"))
+                    {
+                        rayHit.rigidbody.AddForce(_mainCamera.transform.forward, ForceMode.Impulse);
+                    }
+                }
+				_input.push = false;
+			}
+        }
 
 		private void Creation()
         {

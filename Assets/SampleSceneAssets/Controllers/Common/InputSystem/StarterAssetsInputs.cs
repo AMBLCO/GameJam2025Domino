@@ -11,6 +11,7 @@ namespace StarterAssets
 		public bool jump;
 		public bool sprint;
 		public bool create;
+		public bool push;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -47,6 +48,11 @@ namespace StarterAssets
 			CreateInput(value.isPressed);
         }
 
+		public void OnPush(InputValue value)
+        {
+			PushInput(value.isPressed);
+        }
+
 		public void MoveInput(Vector2 newMoveDirection)
 		{
 			move = newMoveDirection;
@@ -70,6 +76,11 @@ namespace StarterAssets
 		public void CreateInput(bool newCreateState)
         {
 			create = newCreateState;
+        }
+
+		public void PushInput(bool newPushState)
+        {
+			push = newPushState;
         }
 
 		private void OnApplicationFocus(bool hasFocus)

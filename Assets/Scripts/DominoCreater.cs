@@ -33,6 +33,7 @@ public class DominoCreater : MonoBehaviour
         cameraRotation.x = 0;
         cameraRotation.y += 90;
 
-        Instantiate(myDomino, spawnPos, Quaternion.Euler(cameraRotation));
+        GameObject newDomino = Instantiate(myDomino, spawnPos, Quaternion.Euler(cameraRotation));
+        newDomino.transform.parent = this.gameObject.transform;
     }
 }
