@@ -73,6 +73,10 @@ namespace StarterAssets
 		private StarterAssetsInputs _input;
 		private GameObject _mainCamera;
 
+		private int _audioSourceCount = 8;
+		private AudioSource[] _audioSources;
+		private bool[] _isPlaying;
+
 		private const float _threshold = 0.01f;
 
 		private bool IsCurrentDeviceMouse
@@ -102,6 +106,14 @@ namespace StarterAssets
 			// reset our timeouts on start
 			_jumpTimeoutDelta = JumpTimeout;
 			_fallTimeoutDelta = FallTimeout;
+
+			_audioSources = new AudioSource[_audioSourceCount];
+			_isPlaying = new bool[_audioSourceCount];
+			for (int i = 0; i < _audioSourceCount; i++)
+			{
+				_audioSources[i] = this.gameObject.AddComponent<AudioSource>();
+				_isPlaying[i] = false;
+			}
 		}
 
 		private void Update()
@@ -131,7 +143,7 @@ namespace StarterAssets
                 {
                     if (rayHit.collider.gameObject.name.Contains("Domino"))
                     {
-						PlayClip("Sounds/Clap");
+						PlayRandomClip();
 						rayHit.rigidbody.AddForce(_mainCamera.transform.forward, ForceMode.Impulse);
                     }
                 }
@@ -148,20 +160,40 @@ namespace StarterAssets
 					if (rayHit.collider.gameObject.name.Contains("Domino"))
 					{
 						Destroy(rayHit.rigidbody.gameObject);
+						PlayRandomClip();
 					}
 				}
 			}
 		}
-		
+
+		private void PlayRandomClip()
+		{
+			string[] clipNames = { "Bang", "Beding badang", "Boom", "Clap", "Paf", "Piou piou", "Poof", "Ronfl" };
+
+			System.Random random = new System.Random();
+			int randomNumber = random.Next(0, clipNames.Length);
+			PlayClip("Sounds/" + clipNames[randomNumber]);
+		}
+
 		private async void PlayClip(string filePath)
         {
-			AudioClip clap = Resources.Load<AudioClip>(filePath);
-			AudioSource audioSource = this.gameObject.AddComponent<AudioSource>();
-			audioSource.clip = clap;
-			audioSource.Play();
+			for (int i = 0; i < _audioSourceCount; i++)
+			{
+				if (!_isPlaying[i])
+				{
+					AudioClip clap = Resources.Load<AudioClip>(filePath);
+					AudioSource audioSource = _audioSources[i];
+					audioSource.clip = clap;
+					audioSource.Play();
+					_isPlaying[i] = true;
 
-			await Task.Delay(TimeSpan.FromSeconds(clap.length));
-            Destroy(audioSource);
+					await Task.Delay(TimeSpan.FromSeconds(clap.length));
+					_isPlaying[i] = false;
+
+					break;
+				}
+			}
+
         }
 
 		private void Creation()
@@ -169,6 +201,7 @@ namespace StarterAssets
 			if(_input.create && !_input.delete)
             {
 				_dominoCreater.CreateDomino();
+				PlayRandomClip();
 			}
 		}
 

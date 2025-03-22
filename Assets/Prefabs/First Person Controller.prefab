@@ -259,7 +259,7 @@ GameObject:
   - component: {fileID: 2821372604402094146}
   m_Layer: 8
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -335,6 +335,7 @@ MonoBehaviour:
   CinemachineCameraTarget: {fileID: 578509394394317818}
   TopClamp: 90
   BottomClamp: -90
+  Score: 0
 --- !u!114 &3571747569245316229
 MonoBehaviour:
   m_ObjectHideFlags: 0
