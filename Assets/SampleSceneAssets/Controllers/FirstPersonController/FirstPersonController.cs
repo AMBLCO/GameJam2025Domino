@@ -141,7 +141,7 @@ namespace StarterAssets
 				RaycastHit rayHit = new RaycastHit();
 				if (Physics.Raycast(_mainCamera.transform.position, _mainCamera.transform.forward, out rayHit, 10))
                 {
-                    if (rayHit.collider.gameObject.name.Contains("Domino"))
+                    if (rayHit.collider.gameObject.tag == "Domino")
                     {
 						PlayRandomClip();
 						rayHit.rigidbody.AddForce(_mainCamera.transform.forward, ForceMode.Impulse);
@@ -157,7 +157,7 @@ namespace StarterAssets
 				RaycastHit rayHit = new RaycastHit();
 				if (Physics.Raycast(_mainCamera.transform.position, _mainCamera.transform.forward, out rayHit, 10))
 				{
-					if (rayHit.collider.gameObject.name.Contains("Domino"))
+					if (rayHit.collider.gameObject.tag == "Domino")
 					{
 						Destroy(rayHit.rigidbody.gameObject);
 						PlayRandomClip();

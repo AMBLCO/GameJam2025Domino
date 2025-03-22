@@ -6,6 +6,7 @@ TagManager:
   tags:
   - CinemachineTarget
   - DominoCreater
+  - Domino
   layers:
   - Default
   - TransparentFX

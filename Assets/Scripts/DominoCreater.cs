@@ -3,7 +3,7 @@ using System;
 
 public class DominoCreater : MonoBehaviour
 {
-    [SerializeField] GameObject myDomino;
+    [SerializeField] GameObject[] myDominos;
 
     //Camera
     private GameObject _mainCamera;
@@ -39,7 +39,9 @@ public class DominoCreater : MonoBehaviour
 			cameraRotation.x = 0;
 			cameraRotation.y += 90;
 
-			GameObject newDomino = Instantiate(myDomino, spawnPos, Quaternion.Euler(cameraRotation));
+			System.Random random = new System.Random();
+			int randomNumber = random.Next(0, myDominos.Length);
+			GameObject newDomino = Instantiate(myDominos[randomNumber], spawnPos, Quaternion.Euler(cameraRotation));
 			newDomino.transform.parent = this.gameObject.transform;
 		}
     }
