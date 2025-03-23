@@ -84,8 +84,11 @@ namespace StarterAssets
 
 		public int pushPrice = 100;
 		public int fasterPrice = 10;
-		public int clearPrice = 1;
+		public int clearPrice = 100;
 		public int sizePrice = 1000;
+		public int skinPrice = 500;
+
+		public int skinToAdd = 0;
 
 		public int numberFaster = 0;
 
@@ -122,6 +125,16 @@ namespace StarterAssets
 				spawnSize.x += 2;
 				spawnSize.y += 2;
 				sizePrice *= 5;
+			}
+		}
+
+		public void BuySkins()
+		{
+			if (Score >= skinPrice)
+			{
+				Score -= skinPrice;
+				_dominoCreater.AddDominoSkin(skinToAdd);
+				skinToAdd++;
 			}
 		}
 

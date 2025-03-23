@@ -1,10 +1,12 @@
 using UnityEngine;
 using System;
 using UnityEngine.Rendering.HighDefinition;
+using Unity.VisualScripting;
+using System.Collections.Generic;
 
 public class DominoCreater : MonoBehaviour
 {
-    [SerializeField] GameObject[] myDominos;
+    [SerializeField] List<GameObject> myDominos;
 
     //Camera
     private GameObject _mainCamera;
@@ -17,6 +19,12 @@ public class DominoCreater : MonoBehaviour
             _mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
         }
     }
+
+	public void AddDominoSkin(int i)
+	{
+		if (i < 8)
+			myDominos.Add(Resources.Load<GameObject>("Prefabs/Viennoiserie" + i));
+	}
 
     public void CreateDomino(Vector2Int size)
     {
@@ -50,7 +58,7 @@ public class DominoCreater : MonoBehaviour
 					pos.y += 1;
 
 					System.Random random = new System.Random();
-					int randomNumber = random.Next(0, myDominos.Length);
+					int randomNumber = random.Next(0, myDominos.Count);
 					GameObject newDomino = Instantiate(myDominos[randomNumber], pos, Quaternion.Euler(cameraRotation));
 					newDomino.transform.parent = this.gameObject.transform;
 				}
