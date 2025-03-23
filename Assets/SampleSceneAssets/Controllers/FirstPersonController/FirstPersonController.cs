@@ -82,24 +82,56 @@ namespace StarterAssets
 		private AudioSource[] _audioSources;
 		private bool[] _isPlaying;
 
+		public int pushPrice = 100;
+		public int fasterPrice = 10;
+		public int clearPrice = 1;
+		public int sizePrice = 1000;
+
+		public int numberFaster = 0;
+
 		private const float _threshold = 0.01f;
+
+		public void ClearMap()
+        {
+			if (Score >= clearPrice)
+			{
+				Score -= clearPrice;
+				GameObject container = GameObject.FindGameObjectWithTag("DominoCreater");
+				for(int i= container.transform.childCount; i > 0; i--)
+                {
+					GameObject childToDestroy = container.transform.GetChild(i-1).gameObject;
+					Destroy(childToDestroy);
+                }
+			}
+		}
 
 		public void BuyPush()
         {
-			if (Score >= 100)
+			if (Score >= pushPrice)
 			{
-				Score -= 100;
+				Score -= pushPrice;
 				pushPower = true;
 			}
         }
 
 		public void BuySize()
 		{
-			if (Score >= 100)
+			if (Score >= sizePrice)
 			{
-				Score -= 100;
+				Score -= sizePrice;
 				spawnSize.x += 2;
 				spawnSize.y += 2;
+				sizePrice *= 5;
+			}
+		}
+
+		public void BuyFaster()
+        {
+			if (Score >= fasterPrice)
+			{
+				Score -= fasterPrice;
+				numberFaster++;
+				fasterPrice *= 2;
 			}
 		}
 
@@ -236,12 +268,15 @@ namespace StarterAssets
 			}
 		}
 
-		private async Task CreateDelay()
-        {
-			creationFrozen = true;
-			await Task.Delay(5);
-			creationFrozen = false;
-        }
+		private async void CreateDelay()
+		{
+			if (numberFaster < 5)
+			{
+				creationFrozen = true;
+				await Task.Delay(TimeSpan.FromSeconds(2 - numberFaster * 0.4));
+				creationFrozen = false;
+			}
+		}
 
 		private void LateUpdate()
 		{
