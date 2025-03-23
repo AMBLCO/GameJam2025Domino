@@ -13,7 +13,7 @@ public class Pointage : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.name.Contains("Domino"))
+		if (collision.gameObject.tag == "Domino")
         {
             if (pointAvailable)
             {
