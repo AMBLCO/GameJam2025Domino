@@ -216,16 +216,12 @@ namespace StarterAssets
         {
 			if(_input.create && !_input.delete)
             {
-<<<<<<< Updated upstream
-				_dominoCreater.CreateDomino();
-				PlayRandomClip();
-=======
 				if (!creationFrozen)
 				{
 					_dominoCreater.CreateDomino();
+					PlayRandomClip();
 					CreateDelay();
 				}
->>>>>>> Stashed changes
 			}
 		}
 
