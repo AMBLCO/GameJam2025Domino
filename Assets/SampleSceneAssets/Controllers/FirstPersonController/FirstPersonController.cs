@@ -117,7 +117,12 @@ namespace StarterAssets
 			}
         }
 
-		public void BuySize()
+        public void JustQuit()
+        {
+			Application.Quit();
+        }
+
+        public void BuySize()
 		{
 			if (Score >= sizePrice)
 			{
