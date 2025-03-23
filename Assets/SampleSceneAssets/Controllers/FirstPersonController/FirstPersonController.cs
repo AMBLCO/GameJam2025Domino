@@ -73,6 +73,7 @@ namespace StarterAssets
 		private StarterAssetsInputs _input;
 		private GameObject _mainCamera;
 		public bool pushPower = false;
+		public Vector2Int spawnSize = new Vector2Int(1, 1);
 		private bool creationFrozen = false;
 
 		[SerializeField] private GameObject _shop;
@@ -91,6 +92,16 @@ namespace StarterAssets
 				pushPower = true;
 			}
         }
+
+		public void BuySize()
+		{
+			if (Score >= 100)
+			{
+				Score -= 100;
+				spawnSize.x += 2;
+				spawnSize.y += 2;
+			}
+		}
 
 		private bool IsCurrentDeviceMouse
 		{
@@ -218,7 +229,7 @@ namespace StarterAssets
             {
 				if (!creationFrozen)
 				{
-					_dominoCreater.CreateDomino();
+					_dominoCreater.CreateDomino(spawnSize);
 					PlayRandomClip();
 					CreateDelay();
 				}
